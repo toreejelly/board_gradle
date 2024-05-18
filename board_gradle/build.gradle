@@ -1,10 +1,11 @@
 plugins {
 	id 'java'
+	id 'war'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.example'
+group = 'board'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -15,22 +16,57 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-}
+	all {
+//		 log4j2 사용에 필요하다고 했지만 없어도 실행이 잘 됨 - 아님 아님 있어야 함
+			exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'	}
+	
+	}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
-	compileOnly 'org.projectlombok:lombok'
+	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+//implementation 'org.springframework.boot:spring-boot-starter-logging:2.6.8'
+	//3.0 이상인 경우
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'jakarta.servlet:jakarta.servlet-api'
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+	
+
+	//3.0 미만인 경우
+	//implementation 'javax.servlet:jstl'
+	//implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	
+	//compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+	//compile('javax.servlet:jstl:1.2')
+
+	
+	
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	
+	//testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+	//testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	
+	// mybatis 
+	// @Mapper를 사용하려면 있어야 한다.
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+	
+	// log4j2 log4j-slf4j2-impl cannot be present with log4j-to-slf4j
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	
+	// oracle DB
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 }
 
 tasks.named('test') {
