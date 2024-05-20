@@ -32,14 +32,14 @@
 					<tr>
 						<td>${status.count}</td>
 						<td>${list.memberId}</td>
-						<td>${list.title}</td>
+						<td><a href="/board/${list.boardId}">${list.title}</a></td>
 						<td>${list.boardDate}</td>
 						<td>${list.hit}</td>							
 					</tr>
 				</c:forEach>			
 			</tbody>	
 		</table>	
-		<button>글쓰기</button>
+		<button type="button" class="btn btn-warning" onclick="location.href='/contentWriteForm';">글쓰기</button>
 	</div>
 
 </body>
