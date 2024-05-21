@@ -34,9 +34,10 @@
 			,data : JSON.stringify(data)
 			,contentType : 'application/json; charset=utf-8'
 			,success : function(result){
-				//console.log("result", result);
+				console.log("result", result);
 				alert("작성되었습니다.");
 				location.href = "/board/"+result;
+				
 			}
 			,error : function(e){
 				console.log(e);
