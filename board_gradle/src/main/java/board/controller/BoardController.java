@@ -84,6 +84,20 @@ public class BoardController {
     	
     }
     
+    //글 수정 페이지
+    @GetMapping("/contentModifyForm/{boardId}")
+    public String contentModifyForm(Model model, BoardVO boardVO) {
+    	log.info("BoardController contentModifyForm()");
+    	log.info("boardVO :" + boardVO);
+    	
+    	int boardId = boardVO.getBoardId();
+    	log.info("boardId :" + boardId);
+    	
+		model.addAttribute("content", boardService.getContent(boardId));
+    	
+		return "contentModifyForm";
+    }
+    
     //글 수정
     @PutMapping("/board/{boardId}")
 	public ResponseEntity<String> contentModify(@RequestBody BoardVO boardVO) {
