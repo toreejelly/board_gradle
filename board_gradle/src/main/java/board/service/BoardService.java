@@ -22,6 +22,9 @@ public interface BoardService {
 	//글 수정
 	public void contentModify(BoardVO boardVO);
 	
+	//글 삭제
+	public void contentDelete(int boardId);
+	
 }
 
 

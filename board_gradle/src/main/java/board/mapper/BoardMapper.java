@@ -23,4 +23,7 @@ public interface BoardMapper {
 	
 	//글 수정
 	public void contentModify(BoardVO boardVO);
+	
+	//글 삭세
+	public void contentDelete(int boardId);
 }

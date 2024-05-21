@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -117,14 +118,31 @@ public class BoardController {
 		}//end
 		
 		return entity;
-		
-    
-    
-    
+		   
      }
     
-
     
+    //글 삭제
+    @DeleteMapping("/board/{boardId}")
+    public ResponseEntity<String> contentDelete(@RequestBody BoardVO boardVO) {
+		log.info("BoardController contentDelete()");
+		log.info("boardVO : " + boardVO);
+
+		ResponseEntity<String> entity = null;
+		int boardId = boardVO.getBoardId();
+	
+		try {
+			boardService.contentDelete(boardId);
+			
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+						
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}//end
+		
+		return entity;
+    }
 
 }
 
