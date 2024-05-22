@@ -90,7 +90,7 @@
 		/* board.mapper.BoardMapper.contentDelete */
 		DELETE BOARD
 		WHERE BOARD_ID = #{boardId} 	
-	</update> 
+	</update>
 	
 	
 	
